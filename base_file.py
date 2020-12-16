@@ -20,8 +20,10 @@ class lastFmSpotify:
             print('ERROR')
         response = response.json()
         for item in response['tracks']['track']:
-            pprint(item)
-            print('\n\n')
+            song = item['name'].title()
+            artist = item['artist']['name'].title()
+            print(song, artist)
+            print('\n')
 
     def get_uri_from_spotify(self):
         pass
