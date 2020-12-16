@@ -5,4 +5,4 @@ def spotify_token():
     return ''
 
 def last_fm_api_key():
-    return ''
+    return '31428cebfc5efeadb28a954c859d841c'
