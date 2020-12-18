@@ -11,6 +11,7 @@ class lastFmSpotify:
         self.headers = {"Content-Type": "application/json",
                         "Authorization": f"Bearer {self.token}"}
         self.playlist_id = ''
+        self.output_uri = ''
 
     def fetch_songs_from_lastfm(self):
         params = {'limit': 5, 'api_key': self.api_key}
@@ -18,31 +19,29 @@ class lastFmSpotify:
         response = requests.get(url, params=params)
         if response.status_code != 200:
             print('ERROR')
-        response = response.json()
-        for item in response['tracks']['track']:
+        res = response.json()
+        for item in res['tracks']['track']:
             song = item['name'].title()
-            artist = item['artist']['name'].title()
+            artist = item['artist']['name']
             print(song, artist)
             self.get_uri_from_spotify(song, artist)
-            print('\n\n')
 
     def get_uri_from_spotify(self, song_name, artist):
-
         url = f'https://api.spotify.com/v1/search?query=track%3A{song_name}+artist%3A{artist}type=track&offset=0&limit=10'
         response = requests.get(url, headers=self.headers)
         print(response.status_code)
         res = response.json()
-        for item in response:
-            pprint(item)
-            print("\n\n")
+        output_uri = res['tracks']['items']
+        print((output_uri)[0])
 
 
     def create_spotify_playlist(self):
-        data = {
-            "name": "LastFM top songs",
-            "description": "Songs from the topcharts of Last FM created via API",
-            "public": False
-        }
+        # data = {
+        #     "name": "LastFM top songs",
+        #     "description": "Songs from the topcharts of Last FM created via API",
+        #     "public": False
+        # }
+        pass
 
     def add_songs_to_playlist(self):
         pass
