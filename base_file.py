@@ -22,7 +22,7 @@ class lastFmSpotify:
         res = response.json()
         for item in res['tracks']['track']:
             song = item['name'].title()
-            artist = item['artist']['name']
+            artist = item['artist']['name'].title()
             print(song, artist)
             self.get_uri_from_spotify(song, artist)
 
@@ -32,7 +32,8 @@ class lastFmSpotify:
         print(response.status_code)
         res = response.json()
         output_uri = res['tracks']['items']
-        print((output_uri)[0])
+        uri = output_uri[0]['uri']
+        print(type(output_uri)[0])
 
 
     def create_spotify_playlist(self):
